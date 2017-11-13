@@ -39,7 +39,7 @@ Check output with <http://tools.ietf.org/tools/idnits/>
 <?rfc rfcprocack="yes" ?>
 <!-- end of list of popular I-D processing instructions -->
 
-<rfc category="info" docName="draft-cheshire-dnssd-privacy-considerations-00" ipr="trust200902">
+<rfc category="info" docName="draft-cheshire-dnssd-privacy-considerations-01" ipr="trust200902">
 
   <front>
     <title abbrev='Private Discovery Threat Considerations'>Private Discovery Threat Considerations</title>
@@ -57,7 +57,7 @@ Check output with <http://tools.ietf.org/tools/idnits/>
         <email>cheshire@apple.com</email>
       </address>
     </author>
-    <date year='2017' month='October' day='30'/>
+    <date year='2017' month='November' day='13'/>
     <area>Internet</area>
     <workgroup>Internet Engineering Task Force</workgroup>
     <keyword>DNS-Based Service Discovery</keyword>
@@ -91,8 +91,8 @@ Check output with <http://tools.ietf.org/tools/idnits/>
       often involve sensitive financial or medical data.
       Furthermore, the ubiquity of such mobile wireless devices
       makes them an attractive target for mischievous or outright criminal activity.
-      The fact that a person's smartphone is communicating with their implanted insulin
-      monitor is not something that should be public information.</t>
+      The fact that a person's smartphone is communicating with their implanted glucose
+      monitor or insulin pump is not something that should be public information.</t>
 
       <t>Hence there is now a need for discovery mechanisms that utilize
       privacy-preserving techniques.
@@ -194,7 +194,7 @@ Check output with <http://tools.ietf.org/tools/idnits/>
       For example, just because a medical app on a smartphone is authorized to discover
       and communicate with the user's medical devices such as an implanted insulin monitor,
       that doesn't mean that social network apps or games on that same smartphone are also
-      authorized to discover and communicate with the those medical devices.
+      authorized to discover and communicate with those medical devices.
       </t>
 
       <t>Note that when the text above talks about a user or app being "authorized" we're
@@ -219,12 +219,13 @@ Check output with <http://tools.ietf.org/tools/idnits/>
 <?rfc needLines="45" ?>
     </section>
 
-    <section title="Threat Model">
+    <section title="Desirable Security Properties">
 
       <t>For each of the operations and information levels described above,
       we need to consider what threats we are concerned about.
         <list style="hanging">
-          <t hangText="Authenticity"><vspace />
+
+          <t hangText="Authenticity &amp; Integrity"><vspace />
           Can we trust the information we receive?
           Has it been modified in flight by an adversary?
           Do we trust the source of the information?</t>
@@ -251,7 +252,7 @@ Check output with <http://tools.ietf.org/tools/idnits/>
           manufacturer, which can yield clues about the nature of the device.
           </t>
 
-          <t hangText="Dictionary Attacks"><vspace />
+          <t hangText="Resistance to Dictionary Attacks"><vspace />
           It can be tempting to use simple one-way hash functions to obscure
           sensitive identifiers.
           This transforms a sensitive unique identifier such as an email address
@@ -261,8 +262,8 @@ Check output with <http://tools.ietf.org/tools/idnits/>
           Given a scrambled unique identifier, it may be possible to do a brute-force attack,
           trying billions of known and speculative email addresses until a match is found.</t>
 
-          <t hangText="Tracking"><vspace />
-          Finally, in today's world, we have to be sensitive to any
+          <t hangText="Resistance to Tracking"><vspace />
+          In today's world, we have to be sensitive to any
           unchanging unique identifier, no matter how thoroughly and
           irreversibly scrambled it may be.
           Even though an attacker may not be able to divine the origin
@@ -278,6 +279,25 @@ Check output with <http://tools.ietf.org/tools/idnits/>
           so that a given identifier is not reused for too long or in different locations.
           These changing identifiers can be decoded by trusted entities,
           but are meaningless to anyone else.</t>
+
+          <t hangText="Resistance to Message Linking"><vspace />
+          Is it possible to link or correlate exchanges across discovery operations?
+          For example, do Discovery messages reveal information
+          about future Use messages, or vice versa?
+          This can be done via sender MAC address, for example.
+          An adversary can use linkability information to de-anonymize service users
+          or providers, even in the event that, individually, no information leaks from
+          any particular message alone (e.g., because it’s encrypted in transit).
+          For example, even if persistent identifiers are rotated periodically,
+          if all identifiers are not rotated in unison then the overlap period can be
+          used to track the user across identifier rotations.</t>
+
+          <t hangText="Resistance to Denial-of-Service Attack"><vspace />
+          In any protocol where the receiver of messages has to perform cryptographic
+          operations on those messages, there is a risk of a brute-force flooding
+          attack causing the receiver to expend excessive amounts of CPU time
+          (and battery power) just processing and discarding those messages.</t>
+
         </list>
       </t>
 
@@ -303,6 +323,24 @@ Check output with <http://tools.ietf.org/tools/idnits/>
         that relies on per-query cryptographic operations,
         with energy-saving techniques that rely on having (somewhat untrusted)
         network proxies answer queries on behalf of sleeping devices.</t>
+
+      </section>
+
+      <section title="Protocol Efficiency">
+
+        <t>Creating a discovery protocol that has the desired security
+        properties may result in a design that is not efficient.
+        To perform the necessary operations the protocol may
+        need to send and receive a large number of network packets.
+        This may consume an unreasonable amount of network capacity
+        (particularly problematic when it's shared wireless spectrum),
+        cause an unnecessary level of power consumption
+        (particularly problematic on battery devices)
+        and may result in the discovery process being slow.</t>
+
+        <t>It is a difficult challenge to design a discovery protocol that has the
+        property of obscuring the details of what it is doing from unauthorized
+        observers, while also managing to do that quickly and efficiently.</t>
 
       </section>
 
