@@ -18,7 +18,7 @@ Check output with <http://tools.ietf.org/tools/idnits/>
 
 <!-- control the table of contents (ToC) -->
 <!-- generate a ToC -->
-<?rfc toc="no"?>
+<?rfc toc="yes"?>
 <!-- the number of levels of subsections in ToC. default: 3 -->
 <?rfc tocdepth="3"?>
 
@@ -67,7 +67,9 @@ Check output with <http://tools.ietf.org/tools/idnits/>
     <keyword>Internet-Draft</keyword>
     <abstract>
       <t>This document provides a framework for evaluating
-      and comparing solutions for privacy-respecting discovery mechanisms.</t>
+      and comparing solutions for privacy-respecting discovery mechanisms.
+      It also evaluates several discovery mechanism designs in the context
+      of this framework.</t>
     </abstract>
   </front>
 
@@ -448,6 +450,7 @@ Check output with <http://tools.ietf.org/tools/idnits/>
           This system has the following properties:
           <list style='numbers'>
             <t>Symmetric work load</t>
+            <t>No fingerprinting or tracking prevention</t>
             <t>No unlinkability</t>
           </list>
         </t>

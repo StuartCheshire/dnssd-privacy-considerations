@@ -14,7 +14,9 @@ Expires: May 17, 2018
 Abstract
 
    This document provides a framework for evaluating and comparing
-   solutions for privacy-respecting discovery mechanisms.
+   solutions for privacy-respecting discovery mechanisms.  It also
+   evaluates several discovery mechanism designs in the context of this
+   framework.
 
 Status of This Memo
 
@@ -51,9 +53,63 @@ Copyright Notice
 
 
 
-
-
 Cheshire                  Expires May 17, 2018                  [Page 1]
+
+Internet-Draft   Private Discovery Threat Considerations   November 2017
+
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   2.  Discovery Operations  . . . . . . . . . . . . . . . . . . . .   4
+   3.  Trust Granularity . . . . . . . . . . . . . . . . . . . . . .   6
+   4.  Desirable Security Properties . . . . . . . . . . . . . . . .   7
+   5.  Other Operational Considerations  . . . . . . . . . . . . . .   9
+     5.1.  Power Management  . . . . . . . . . . . . . . . . . . . .   9
+     5.2.  Protocol Efficiency . . . . . . . . . . . . . . . . . . .   9
+     5.3.  Secure Initialization and Trust Models  . . . . . . . . .   9
+     5.4.  External Dependencies . . . . . . . . . . . . . . . . . .  11
+   6.  Survey of Implementations . . . . . . . . . . . . . . . . . .  11
+     6.1.  DNS-SD Privacy Extensions . . . . . . . . . . . . . . . .  11
+     6.2.  Private IoT . . . . . . . . . . . . . . . . . . . . . . .  12
+   7.  Informative References  . . . . . . . . . . . . . . . . . . .  13
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  13
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cheshire                  Expires May 17, 2018                  [Page 2]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -109,7 +165,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-Cheshire                  Expires May 17, 2018                  [Page 2]
+Cheshire                  Expires May 17, 2018                  [Page 3]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -165,7 +221,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-Cheshire                  Expires May 17, 2018                  [Page 3]
+Cheshire                  Expires May 17, 2018                  [Page 4]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -221,7 +277,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-Cheshire                  Expires May 17, 2018                  [Page 4]
+Cheshire                  Expires May 17, 2018                  [Page 5]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -277,7 +333,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-Cheshire                  Expires May 17, 2018                  [Page 5]
+Cheshire                  Expires May 17, 2018                  [Page 6]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -333,7 +389,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-Cheshire                  Expires May 17, 2018                  [Page 6]
+Cheshire                  Expires May 17, 2018                  [Page 7]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -389,7 +445,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-Cheshire                  Expires May 17, 2018                  [Page 7]
+Cheshire                  Expires May 17, 2018                  [Page 8]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -445,7 +501,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-Cheshire                  Expires May 17, 2018                  [Page 8]
+Cheshire                  Expires May 17, 2018                  [Page 9]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -501,7 +557,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-Cheshire                  Expires May 17, 2018                  [Page 9]
+Cheshire                  Expires May 17, 2018                 [Page 10]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -557,12 +613,14 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-Cheshire                  Expires May 17, 2018                 [Page 10]
+Cheshire                  Expires May 17, 2018                 [Page 11]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
-   2.  No unlinkability
+   2.  No fingerprinting or tracking prevention
+
+   3.  No unlinkability
 
 6.2.  Private IoT
 
@@ -611,9 +669,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-
-
-Cheshire                  Expires May 17, 2018                 [Page 11]
+Cheshire                  Expires May 17, 2018                 [Page 12]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -669,7 +725,7 @@ Author's Address
 
 
 
-Cheshire                  Expires May 17, 2018                 [Page 12]
+Cheshire                  Expires May 17, 2018                 [Page 13]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
@@ -725,4 +781,4 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-Cheshire                  Expires May 17, 2018                 [Page 13]
+Cheshire                  Expires May 17, 2018                 [Page 14]
