@@ -24,7 +24,7 @@ Status of This Memo
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
    working documents as Internet-Drafts.  The list of current Internet-
-   Drafts is at https://datatracker.ietf.org/drafts/current/.
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
@@ -40,7 +40,7 @@ Copyright Notice
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
-   (https://trustee.ietf.org/license-info) in effect on the date of
+   (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
@@ -250,7 +250,12 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
    smartphone are also authorized to discover and communicate with those
    medical devices.
 
-   Note that when the text above talks about a user or app being
+   Note that services may also be restricted to certain policies that
+   identify single devices, users, or groups of users.  An entity may
+   thus vary in granularity from a specific device for a single user, to
+   a range of devices for a group of users belonging to the same policy.
+
+   Moreover, even when the text above talks about a user or app being
    "authorized" we're not talking about authorization controls being
    enforced by the laptop or smartphone.  Controls enforced by the
    laptop or smartphone operating system are appropriate and have their
@@ -272,11 +277,6 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
 
-
-
-
-
-
 Cheshire                  Expires May 17, 2018                  [Page 5]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
@@ -287,10 +287,11 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
    For each of the operations and information levels described above, we
    need to consider what threats we are concerned about.
 
-   Authenticity & Integrity
+   Authenticity, Integrity & Freshness
       Can we trust the information we receive?  Has it been modified in
       flight by an adversary?  Do we trust the source of the
-      information?
+      information?  Is the source of information fresh, i.e., not
+      replayed?
 
    Confidentiality
       Who can read the information sent in messages?  Ideally this
@@ -302,16 +303,19 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
       relationship with a new entity it has never previously
       communicated with.
 
-   Anonymity
+   Anonymity & Privacy
       Does the information exchange reveal the identity of either
-      participant?  In this context "identity" can mean things like the
-      name, email address, or phone number of the human user.  It could
-      mean things like the hostname or MAC address of the device.  Even
-      when information is authenticated and confidential, there can be
-      unexpected sources of information leakage.  For example, if
-      suitable precautions are not taken, the source MAC address in data
-      packets can reveal the identity of the device manufacturer, which
-      can yield clues about the nature of the device.
+      participant?  In many instances, identities are safe against
+      passive attacks, yet not against active attackers.  Ideally,
+      mutual identity privacy is preserved.  In this context "identity"
+      can mean things like the name, email address, or phone number of
+      the human user.  It could mean things like the hostname or MAC
+      address of the device.  Even when information is authenticated and
+      confidential, there can be unexpected sources of information
+      leakage.  For example, if suitable precautions are not taken, the
+      source MAC address in data packets can reveal the identity of the
+      device manufacturer, which can yield clues about the nature of the
+      device.
 
    Resistance to Dictionary Attacks
       It can be tempting to use simple one-way hash functions to obscure
@@ -326,10 +330,6 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
    Resistance to Tracking
       In today's world, we have to be sensitive to any unchanging unique
       identifier, no matter how thoroughly and irreversibly scrambled it
-      may be.  Even though an attacker may not be able to divine the
-      origin of a scrambled unique identifier, the unchanging unique
-      identifier may still be correlated with other things.  If a given
-      unchanging unique identifier appears on a cafe network every
 
 
 
@@ -338,6 +338,10 @@ Cheshire                  Expires May 17, 2018                  [Page 6]
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
+      may be.  Even though an attacker may not be able to divine the
+      origin of a scrambled unique identifier, the unchanging unique
+      identifier may still be correlated with other things.  If a given
+      unchanging unique identifier appears on a cafe network every
       morning when a certain person comes in to get coffee, then with
       some certainty that unchanging unique identifier can be associated
       with that person, and used to track their movements around the
@@ -348,7 +352,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
       locations.  These changing identifiers can be decoded by trusted
       entities, but are meaningless to anyone else.
 
-   Resistance to Message Linking
+   Resistance to Linkability
       Is it possible to link or correlate exchanges across discovery
       operations?  For example, do Discovery messages reveal information
       about future Use messages, or vice versa?  This can be done via
@@ -368,15 +372,11 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
       excessive amounts of CPU time (and battery power) just processing
       and discarding those messages.
 
-
-
-
-
-
-
-
-
-
+   Resistance to Sender Impersonation
+      Sender impersonation is an attack wherein messages such as service
+      offers are forged by entities who do not possess the corresponding
+      secret key material.  These attacks may be used to learn the
+      identity of a communicating party, actively or passively.
 
 
 
@@ -394,7 +394,7 @@ Cheshire                  Expires May 17, 2018                  [Page 7]
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
-5.  Other Operational Requirements
+5.  Other Operational Considerations
 
 5.1.  Power Management
 
@@ -430,7 +430,7 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
    unauthorized observers, while also managing to do that quickly and
    efficiently.
 
-5.3.  Secure Initialization
+5.3.  Secure Initialization and Trust Models
 
    One of the challenges implicit in the preceding discussions is that
    whenever we discuss "trusted entities" versus "untrusted entities",
@@ -506,12 +506,127 @@ Cheshire                  Expires May 17, 2018                  [Page 9]
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 
-6.  Informative References
+5.4.  External Dependencies
+
+   Trust establishment may depend on external, and optionally online,
+   parties.  Systems which have such a dependency may be attacked by
+   interfering with communication to external dependencies.  Where
+   possible, such dependencies should be minimized.  Local trust models
+   are best for secure initialization in the presence of active
+   attackers.
+
+6.  Implementation Survey
+
+6.1.  DNS-SD Privacy Extensions
+
+   Huitema et al.  [I-D.huitema-dnssd-privacy] decompose private service
+   discovery into two stages: (1) identify specific peers offering
+   private services, and (2) issue unicast DNS-SD queries to those hosts
+   after connecting over TLS using a previously agreed upon pre-shared
+   key (PSK), or pairing key.  Any out-of-band pairing mechanism will
+   suffice for PSK establishment, though the authors specifically
+   mention [I-D.ietf-dnssd-pairing] as the pairing mechanism.  Step (1)
+   is done by broadcasting "private instance names" to local peers,
+   using service-specific pairing keys.  A private instance name N' for
+   some service with name N is composed of a unique nonce r and
+   commitment to r using N_k.  Commitments are constructed by hashing
+   N_k with the nonce.  Only owners of N_k may verify its correctness
+   and, upon doing so, answer as needed.  The draft recommends
+   randomizing hostnames in SRV responses to minimize likability to
+   specific hosts.  Note that this does not prevent fingerprinting and
+   tracking using that hostname.
+
+   After discovering its peers, a node will directly connect to each
+   device using TLS, authenticated with a PSK derived from each
+   associated pairing key, and issue DNS-SD queries per usual.  DNS
+   messages are formulated as per [RFC7858].
+
+   As an optimization, the authors recommend that each nonce be
+   deterministically derived based on time so that commitment proofs may
+   be precomputed asynchronously.  This avoids O(N*M) computation, where
+   N is the number of nodes in a local network and M is the number of
+   per-node pairings.
+
+   This system has the following properties:
+
+   1.  Symmetric work load
+
+   2.  No unlinkability
+
+
+
+
+
+Cheshire                  Expires May 17, 2018                 [Page 10]
+
+Internet-Draft   Private Discovery Threat Considerations   November 2017
+
+
+6.2.  Private IoT
+
+   Boneh et al.  [Wu16] developed an approach for private service
+   discovery that reduces to private mutual authentication.  Moreover,
+   it should be infeasible for any adversary to forge advertisements or
+   impersonate anyone else on the network.  Specifically, service
+   discoverers only wish to reveal their identity to services they
+   trust, and vice versa.  Existing protocols such as TLS, IKE, and
+   [SIGMA] require that one side reveal its identity first.  Their
+   approach first allocates, via some policy manager, key pairs
+   associated with human-readable policy names.  For example, user Alice
+   might have a key pair associated with the names /Alice, /Alice/
+   Family, and /Alice/Device.  Her key is bound to each of these names.
+   Authentication policies (and trust models) are then expressed as
+   policy prefix patterns, e.g., /Alice/*. Broadcast messages are
+   encrypted to policies.  For example, Alice might encrypt a message m
+   to the policy /Bob/*. Only Bob, who owns a private key bound to,
+   e.g., /Bob/Devices, can decrypt m.  (This procedure uses a form of
+   identity-based encryption called prefix-based encryption.  Readers
+   are referred to [Wu16] for a thorough description.)
+
+   Using prefix- and policy-based encryption, service discovery is
+   decomposed into two steps: (1) service announcement and (2) key
+   exchange, similar to [I-D.huitema-dnssd-privacy].  Announcements
+   carry service identities, ephemeral key shares, and a signature, all
+   encrypted under the service's desired policy prefix, e.g., /Alice/
+   Family/*. Upon receipt of an announcement, clients with matching
+   policy private keys can decrypt the announcement and use the
+   ephemeral key share to perform an Authenticated Diffie Hellman key
+   exchange with the service.  Upon completion, the derived shared
+   secret may be used for any further communication, e.g., DNS-SD
+   queries, if needed.
+
+   This system has the following properties:
+
+   1.  Mutual identity privacy
+
+   2.  Asymmetric work load (computation on the order of advertisements)
+
+   3.  Client identity policy, cleartext server policy
+
+   4.  No unlinkability
+
+7.  Informative References
+
+
+
+
+
+
+
+Cheshire                  Expires May 17, 2018                 [Page 11]
+
+Internet-Draft   Private Discovery Threat Considerations   November 2017
+
 
    [RFC5054]  Taylor, D., Wu, T., Mavrogiannopoulos, N., and T. Perrin,
               "Using the Secure Remote Password (SRP) Protocol for TLS
               Authentication", RFC 5054, DOI 10.17487/RFC5054, November
               2007, <https://www.rfc-editor.org/info/rfc5054>.
+
+   [RFC7858]  Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,
+              and P. Hoffman, "Specification for DNS over Transport
+              Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
+              2016, <https://www.rfc-editor.org/info/rfc7858>.
 
    [RFC8235]  Hao, F., Ed., "Schnorr Non-interactive Zero-Knowledge
               Proof", RFC 8235, DOI 10.17487/RFC8235, September 2017,
@@ -520,6 +635,25 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
    [RFC8236]  Hao, F., Ed., "J-PAKE: Password-Authenticated Key Exchange
               by Juggling", RFC 8236, DOI 10.17487/RFC8236, September
               2017, <https://www.rfc-editor.org/info/rfc8236>.
+
+   [I-D.huitema-dnssd-privacy]
+              Huitema, C. and D. Kaiser, "Privacy Extensions for DNS-
+              SD", 2017, <https://tools.ietf.org/html/draft-ietf-dnssd-
+              privacy-03>.
+
+   [I-D.ietf-dnssd-pairing]
+              Huitema, C. and D. Kaiser, "Device Pairing Using Short
+              Authentication Strings", 2017,
+              <https://tools.ietf.org/html/draft-ietf-dnssd-pairing-03>.
+
+   [Wu16]     Wu, D., Taly, A., Shankar, A., and D. Boneh, "Privacy,
+              discovery, and authentication for the internet of things",
+              2016, <https://arxiv.org/pdf/1604.06959.pdf%22>.
+
+   [SIGMA]    Krawczyk, H., "SIGMA: The 'SIGn-and-MAc'approach to
+              authenticated Diffie-Hellman and its use in the IKE
+              protocols", 2003, <http://link.springer.com/content/
+              pdf/10.1007/978-3-540-45146-4_24.pdf>.
 
 Author's Address
 
@@ -535,26 +669,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Cheshire                  Expires May 17, 2018                 [Page 10]
+Cheshire                  Expires May 17, 2018                 [Page 12]
