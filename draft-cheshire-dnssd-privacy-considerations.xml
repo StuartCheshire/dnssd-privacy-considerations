@@ -431,14 +431,11 @@ Check output with <http://tools.ietf.org/tools/idnits/>
 
 <?rfc needLines="45" ?>
     </section>
-       
-    <section title="Survey of Implementations">
-    
-         <t>TODO(caw): survey other implementations here</t>
-         
-    </section>
 
-    <section title="Implementation Survey">
+    <section title="Survey of Implementations">
+
+      <t>This section surveys several private service discovery designs in the context of the threat model
+        detailed above.</t>
 
       <section title="DNS-SD Privacy Extensions">
         <t>Huitema et al. <xref target="I-D.huitema-dnssd-privacy"></xref> decompose private service discovery into two stages: (1) identify specific peers offering private services, and (2) issue unicast DNS-SD queries to those hosts after connecting over TLS using a previously agreed upon pre-shared key (PSK), or pairing key. Any out-of-band pairing mechanism will suffice for PSK establishment, though the authors specifically mention <xref target="I-D.ietf-dnssd-pairing"></xref> as the pairing mechanism. Step (1) is done by broadcasting “private instance names” to local peers, using service-specific pairing keys. A private instance name N’ for some service with name N is composed of a unique nonce r and commitment to r using N_k. Commitments are constructed by hashing N_k with the nonce. Only owners of N_k may verify its correctness and, upon doing so, answer as needed. The draft recommends randomizing hostnames in SRV responses to minimize likability to specific hosts. Note that this does not prevent fingerprinting and tracking using that hostname.</t>

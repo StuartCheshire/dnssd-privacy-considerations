@@ -515,7 +515,10 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
    are best for secure initialization in the presence of active
    attackers.
 
-6.  Implementation Survey
+6.  Survey of Implementations
+
+   This section surveys several private service discovery designs in the
+   context of the threat model detailed above.
 
 6.1.  DNS-SD Privacy Extensions
 
@@ -551,9 +554,6 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
    1.  Symmetric work load
 
-   2.  No unlinkability
-
-
 
 
 
@@ -561,6 +561,8 @@ Cheshire                  Expires May 17, 2018                 [Page 10]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
+
+   2.  No unlinkability
 
 6.2.  Private IoT
 
@@ -605,8 +607,6 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
    4.  No unlinkability
 
-7.  Informative References
-
 
 
 
@@ -617,6 +617,8 @@ Cheshire                  Expires May 17, 2018                 [Page 11]
 
 Internet-Draft   Private Discovery Threat Considerations   November 2017
 
+
+7.  Informative References
 
    [RFC5054]  Taylor, D., Wu, T., Mavrogiannopoulos, N., and T. Perrin,
               "Using the Secure Remote Password (SRP) Protocol for TLS
@@ -657,6 +659,21 @@ Internet-Draft   Private Discovery Threat Considerations   November 2017
 
 Author's Address
 
+
+
+
+
+
+
+
+
+
+
+Cheshire                  Expires May 17, 2018                 [Page 12]
+
+Internet-Draft   Private Discovery Threat Considerations   November 2017
+
+
    Stuart Cheshire
    Apple Inc.
    1 Infinite Loop
@@ -669,4 +686,43 @@ Author's Address
 
 
 
-Cheshire                  Expires May 17, 2018                 [Page 12]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cheshire                  Expires May 17, 2018                 [Page 13]
