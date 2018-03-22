@@ -57,7 +57,20 @@ Check output with <http://tools.ietf.org/tools/idnits/>
         <email>cheshire@apple.com</email>
       </address>
     </author>
-    <date year='2017' month='November' day='13'/>
+    <author initials='C.' surname='Wood' fullname='Christopher A. Wood'>
+      <organization>Apple Inc.</organization>
+      <address>
+        <postal>
+          <street>One Apple Way</street>
+          <city>Cupertino</city>
+          <region>California</region>
+          <code>95014</code>
+          <country>USA</country>
+        </postal>
+        <email>cawood@apple.com</email>
+      </address>
+    </author>
+    <date year='2018' month='March' day='22'/>
     <area>Internet</area>
     <workgroup>Internet Engineering Task Force</workgroup>
     <keyword>DNS-Based Service Discovery</keyword>
@@ -312,6 +325,11 @@ Check output with <http://tools.ietf.org/tools/idnits/>
           Sender impersonation is an attack wherein messages such as service offers are forged 
           by entities who do not possess the corresponding secret key material. These attacks
           may be used to learn the identity of a communicating party, actively or passively.</t>
+
+          <t hangText="Sender Deniability"><vspace />
+          Deniability of sender activity, e.g., of broadcasting a discovery request, may be 
+          desirable or necessary in some use cases. This property ensures that eavesdroppers
+          cannot prove senders issued a specific message destined for one or more peers. </t>
 
         </list>
       </t>
